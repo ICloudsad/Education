@@ -340,9 +340,11 @@ create external table if not exists ods_test_exam_question_inc(
 
 
 ----- 试卷表
+drop table ods_test_paper_full;
 create external table if not exists ods_test_paper_full(
     id string,
     paper_title string,
+    course_id string,
     create_time string,
     update_time string,
     publisher_id string,
@@ -353,6 +355,8 @@ create external table if not exists ods_test_paper_full(
     stored as TEXTFILE
     location '/warehouse/edu/ods_test_paper_full'
     TBLPROPERTIES ("orc.compress"="GZIP");
+
+msck repair table ods_test_paper_full;
 
 
 ------ 试卷问题表
